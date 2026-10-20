@@ -48,7 +48,21 @@ Configured as a real-time Splunk alert:
 - **Defense Evasion:** Indicator Removal: Clear Windows Event Logs (T1070.001)
 
 ## Screenshots
-*(Add your Splunk screenshots here)*
+
+### Event ID Breakdown (915 events ingested)
+![Event ID Breakdown](page-000.png)
+
+### esentutl.exe Process Creation (EventID 4688)
+![Process Creation](page-001.png)
+
+### SAM Database File Access (EventID 4663)
+![SAM File Access](page-002.png)
+
+### lsass.exe Accessing esentutl.exe Memory (Sysmon EventID 10)
+![Process Memory Access](page-003.png)
+
+### Detection Alert Configuration
+![Alert Configuration](page-004.png)
 
 ## What I Learned
 Going through this reinforced how important cross-source correlation is. The Windows Security log alone tells part of the story, but without Sysmon's process access events, the lsass/esentutl relationship would have been invisible. It also made me think differently about log clearing: seeing EventID 1102 at the end of a credential theft sequence is itself a detection signal, not just noise.
