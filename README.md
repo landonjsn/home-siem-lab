@@ -13,7 +13,7 @@ I built this lab to get hands-on experience detecting a real attacker technique 
 ## The Attack
 **Technique:** OS Credential Dumping via SAM (MITRE ATT&CK T1003.002)
 
-The SAM database stores hashed passwords for every local Windows account on a machine. Attackers use tools like esentutl.exe, a legitimate Windows database utility, to quietly make a copy of it. Once they have the copy, they can crack the hashes offline or use them in pass-the-hash attacks without ever needing the actual password. It's a real technique used in the wild and subtle enough to blend in with normal Windows activity if you're not watching the right events.
+The SAM database stores hashed passwords for every local Windows account on a machine. Attackers use tools like esentutl.exe, a legitimate Windows database utility, to quietly make a copy of it. Once they have the copy, they can crack the hashes offline or use them in pass-the-hash attacks without ever needing the actual password. It's a real technique used and subtle enough to blend in with normal Windows activity if you're not watching the right events.
 
 ## What I Did
 
@@ -65,4 +65,4 @@ Configured as a Splunk alert:
 ![Alert Configuration](page-004.png)
 
 ## What I Took Away
-The biggest thing this reinforced was how much cross-source correlation matters. The Windows Security log alone tells part of the story, but without Sysmon's process access events, the lsass/esentutl relationship would have been invisible. It also changed how I think about log clearing: seeing EventID 1102 at the end of a credential theft sequence isn't just noise, it's a signal in itself.
+The biggest takeaway was how much cross-source correlation matters. Relying on one log source isn’t enough. Without Sysmon, the lsass/esentutl connection disappears entirely. I also came away thinking differently about log clearing: EventID 1102 showing up after a credential theft sequence isn’t just noise, it’s a signal in itself.
